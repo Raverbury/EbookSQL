@@ -135,5 +135,7 @@ CREATE TABLE transaction_detail (
     FOREIGN KEY (trans_info_id)
         REFERENCES transaction_info (trans_id)
         ON DELETE CASCADE,
-    PRIMARY KEY (trans_detail_id)
+    PRIMARY KEY (trans_detail_id),
+    index (isbn),
+    index (trans_info_id)
 );
