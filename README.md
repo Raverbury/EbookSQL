@@ -2,6 +2,7 @@
 SQL scripts used in Database Systems Lab, Assignment 2
 
 Made in MySQL and intended to be run only with MySQL. Using the Workbench, execute these scripts in the following order:
+
     + setup
     + triggers
     + procedures
