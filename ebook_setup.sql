@@ -122,7 +122,8 @@ CREATE TABLE transaction_info (
 );
 
 CREATE TABLE transaction_detail (
-    trans_id INT NOT NULL,
+    trans_detail_id INT NOT NULL AUTO_INCREMENT,
+    trans_info_id INT NOT NULL,
     isbn CHAR(13) NOT NULL,
     quantity INT NOT NULL CHECK (quantity >= 0),
     service ENUM('buy', 'rent') NOT NULL,
@@ -131,8 +132,8 @@ CREATE TABLE transaction_detail (
     FOREIGN KEY (isbn)
         REFERENCES book (isbn)
         ON DELETE CASCADE,
-    FOREIGN KEY (trans_id)
+    FOREIGN KEY (trans_info_id)
         REFERENCES transaction_info (trans_id)
         ON DELETE CASCADE,
-    PRIMARY KEY (trans_id , isbn)
+    PRIMARY KEY (trans_detail_id)
 );

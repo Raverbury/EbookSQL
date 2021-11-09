@@ -49,7 +49,7 @@ insert into transaction_info (bookstore_account, total_price, customer_id) value
 (0, 30000, 1),
 (0, 280000, 2);
 
-insert into transaction_detail values
+insert into transaction_detail (trans_info_id, isbn, quantity, service, price, trans_date) values
 (1, '0000000000001', 1, 'buy', 30000, '2021-11-05 13:06:09'),
 (2, '0000000000001', 1, 'rent', 20000, '2021-11-05 13:06:09'),
 (2, '0000000000004', 2, 'buy', 260000, '2021-11-17 13:06:09');
