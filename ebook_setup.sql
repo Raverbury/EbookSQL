@@ -53,20 +53,22 @@ CREATE TABLE store_info (
 );
 
 CREATE TABLE author (
+    author_id INT NOT NULL AUTO_INCREMENT,
     author_name CHAR(255) NOT NULL,
-    PRIMARY KEY (author_name)
+    PRIMARY KEY (author_id),
+    INDEX (author_name)
 );
 
 CREATE TABLE publication_info (
     pub_id INT NOT NULL AUTO_INCREMENT,
     isbn CHAR(13) NOT NULL,
-    author_name CHAR(255),
+    author_id INT NOT NULL,
     FOREIGN KEY (isbn)
         REFERENCES book (isbn)
         ON DELETE CASCADE,
-    FOREIGN KEY (author_name)
-        REFERENCES author (author_name)
-        ON DELETE SET NULL,
+    FOREIGN KEY (author_id)
+        REFERENCES author (author_id)
+        ON DELETE CASCADE,
     PRIMARY KEY (pub_id)
 );
 

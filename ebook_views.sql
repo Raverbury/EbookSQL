@@ -7,6 +7,8 @@ CREATE VIEW num_books_per_author AS
         author_name, COUNT(isbn) AS num_books_published
     FROM
         publication_info
+            JOIN
+        author ON publication_info.author_id = author.author_id
     GROUP BY author_name
     ORDER BY num_books_published DESC;
     

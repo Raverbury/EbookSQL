@@ -25,7 +25,9 @@ delimiter $$
 create procedure add_book (in isbn char(13), in bname char(255), in qtt int, in bp int, in rp int, in aname char(255))
 begin
 	insert into book values (isbn, bname, qtt, bp, rp);
-    insert into author values (aname);
-    insert into publication_info (isbn, author_name) values (isbn, aname);
+    insert into author (author_name) values (aname);
+    set @aid = 0;
+    select author_id INTO @aid from author where author_name = aname;
+    insert into publication_info (isbn, author_id) values (isbn, @aid);
 end $$
 delimiter ;

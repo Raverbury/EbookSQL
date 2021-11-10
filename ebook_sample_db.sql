@@ -8,16 +8,16 @@ insert into book values
 ('0000000000003', 'Bullet hell, a basic guide', 40, 30000, 20000),
 ('0000000000004', 'Memes - Relics of history', 12, 130000, 85000);
 
-insert into author values
+insert into author (author_name) values
 ('J.K Bowling'),
 ('Wouldiwas Shookspeared'),
 ('Wario');
 
-insert into publication_info (isbn, author_name) values
-('0000000000001', 'J.K Bowling'),
-('0000000000002', 'J.K Bowling'),
-('0000000000003', 'Wouldiwas Shookspeared'),
-('0000000000004', 'Wario');
+insert into publication_info (isbn, author_id) values
+('0000000000001', 1),
+('0000000000002', 2),
+('0000000000003', 2),
+('0000000000004', 3);
 
 insert into keyword values
 ('0000000000001', 'Isekai'),

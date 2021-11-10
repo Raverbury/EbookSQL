@@ -10,6 +10,8 @@ select * from sales_last_week;
 select * from sales_today;
 select * from books_sold_all_time;
 
+update book set isbn = 'gei' where 1 = 1;
+
 call books_sold_by_day('2021-11-05');
 call add_book('0000000000005', 'Mein Kampf', 100, 4000, 3000, 'Hitler');
 
