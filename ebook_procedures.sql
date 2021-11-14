@@ -31,3 +31,66 @@ begin
     insert into publication_info (isbn, author_id) values (isbn, @aid);
 end $$
 delimiter ;
+
+delimiter $$
+create procedure check_books_bought_last_month (in uname char(32))
+begin
+	SELECT 
+		transaction_detail.isbn,
+		book.book_name,
+		transaction_detail.service,
+		transaction_detail.quantity
+	FROM
+		transaction_info
+			JOIN
+		transaction_detail ON transaction_info.trans_id = transaction_detail.trans_info_id
+			JOIN
+		book ON transaction_detail.isbn = book.isbn
+			JOIN
+        customer on transaction_info.customer_id = customer.customer_id
+	WHERE
+		customer.username = uname AND DATE(transaction_detail.trans_date) BETWEEN CURDATE() - 30 AND CURDATE();
+end $$
+delimiter ;
+
+delimiter $$
+create procedure check_books_bought_per_genre_last_month (in uname char(32))
+begin
+	SELECT 
+		genre.genre_name,
+		SUM(transaction_detail.quantity) AS total_quantity
+	FROM
+		transaction_info
+	JOIN
+		transaction_detail ON transaction_info.trans_id = transaction_detail.trans_info_id
+        JOIN
+    customer ON transaction_info.customer_id = customer.customer_id
+        JOIN
+    genre ON transaction_detail.isbn = genre.isbn
+WHERE
+    customer.username = uname
+        AND DATE(transaction_detail.trans_date) BETWEEN CURDATE() - 30 AND CURDATE()
+GROUP BY genre.genre_name
+ORDER BY total_quantity DESC;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure check_books_bought_per_session_last_month (in uname char(32))
+begin
+	SELECT 
+		transaction_info.trans_id,
+		SUM(transaction_detail.quantity) AS total_quantity
+	FROM
+		transaction_info
+	JOIN
+		transaction_detail ON transaction_info.trans_id = transaction_detail.trans_info_id
+        JOIN
+    customer ON transaction_info.customer_id = customer.customer_id
+WHERE
+    customer.username = uname
+        AND DATE(transaction_detail.trans_date) BETWEEN CURDATE() - 30 AND CURDATE()
+GROUP BY transaction_info.trans_id
+ORDER BY total_quantity DESC;
+end $$
+delimiter ;
