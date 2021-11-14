@@ -10,4 +10,6 @@ Made in MySQL and intended to be run only with MySQL. Using the Workbench, execu
     + sample_db
     + test (not really a script, it's there to test various statements after setting up everything)
     
-Made any changes to the 5 setup scripts? Just run them again in the same order
+Made any changes to the 5 setup scripts? Just run them again in the same order.
+
+New queries implemented per the PDF's instruction is separated into its own script for easy viewing. Those queries are already included in the other modules.
