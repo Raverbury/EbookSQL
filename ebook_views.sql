@@ -59,7 +59,7 @@ CREATE VIEW books_sold_last_week AS
     GROUP BY date , book_name
     ORDER BY total_quantity;
     
-CREATE VIEW books_sold_last_month AS
+CREATE VIEW books_sold_last_month_gpd AS
     SELECT 
         DATE(transaction_detail.trans_date) AS date,
         book.book_name AS book_name,
@@ -72,6 +72,20 @@ CREATE VIEW books_sold_last_month AS
     WHERE
         DATE(trans_date) BETWEEN CURDATE() - 30 AND CURDATE()
     GROUP BY date , book_name
+    ORDER BY total_quantity;
+    
+CREATE VIEW books_sold_last_month AS
+    SELECT 
+        book.book_name AS book_name,
+        book.isbn AS isbn,
+        SUM(transaction_detail.quantity) AS total_quantity
+    FROM
+        transaction_detail
+            JOIN
+        book ON transaction_detail.isbn = book.isbn
+    WHERE
+        DATE(trans_date) BETWEEN CURDATE() - 30 AND CURDATE()
+	GROUP BY book_name
     ORDER BY total_quantity;
 
 CREATE VIEW books_sold_all_time AS

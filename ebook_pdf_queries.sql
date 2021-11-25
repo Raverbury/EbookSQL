@@ -138,13 +138,23 @@ CREATE VIEW books_by_keyword AS
 
 # ii.8
 delimiter $$
-create procedure add_book (in isbn char(13), in bname char(255), in qtt int, in bp int, in rp int, in aname char(255))
+create procedure check_books_bought_last_month (in uname char(32))
 begin
-	insert into book values (isbn, bname, qtt, bp, rp);
-    insert into author (author_name) values (aname);
-    set @aid = 0;
-    select author_id INTO @aid from author where author_name = aname;
-    insert into publication_info (isbn, author_id) values (isbn, @aid);
+	SELECT 
+		transaction_detail.isbn,
+		book.book_name,
+		transaction_detail.service,
+		transaction_detail.quantity
+	FROM
+		transaction_info
+			JOIN
+		transaction_detail ON transaction_info.trans_id = transaction_detail.trans_info_id
+			JOIN
+		book ON transaction_detail.isbn = book.isbn
+			JOIN
+        customer on transaction_info.customer_id = customer.customer_id
+	WHERE
+		customer.username = uname AND DATE(transaction_detail.trans_date) BETWEEN CURDATE() - 30 AND CURDATE();
 end $$
 delimiter ;
 
