@@ -15,8 +15,6 @@ begin
 end; $$
 delimiter ;
 
-drop trigger expiry_date_constraint_update;
-
 delimiter $$
 create trigger expiry_date_constraint_insert 
 before insert on credit_card
