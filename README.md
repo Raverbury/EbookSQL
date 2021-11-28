@@ -12,4 +12,4 @@ Made in MySQL and intended to be run only with MySQL. Using the Workbench, execu
     
 Should any changes are made to the 5 scripts, run them again in the same order to reflect the new changes.
 
-New queries implemented per the PDF's instruction are placed into a separate script (ebook_pdf_queries.sql) for easy viewing. Other scripts already include these by default.
+New queries implemented per the PDF's instruction are placed into a separate script (ebook_pdf_queries.sql) for easy viewing. Other script files already include these by default where relevant.
